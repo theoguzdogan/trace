@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { getBookDataAsync, tryfunction } from './rest';
 import { useState, useEffect } from "react";
-import { CameraView, Camera } from "expo-camera/next";
+import { CameraView, Camera } from "expo-camera";
 import { useIsFocused } from '@react-navigation/native';
 import Bookshelf from './Bookshelf';
 
@@ -59,43 +59,37 @@ function AboutScreen({ navigation }) {
   );
 }
 
- function SearchScreen({ navigation }) {
-  const [isbnSearch, setIsbnSearch] = React.useState('');
-  const [bookInit, setBookInit] = React.useState(false);
-  //let bookData;
-  let bookData = {
+function SearchScreen({ navigation }) {
+  const [isbnSearch, setIsbnSearch] = useState('');
+  const [bookData, setBookData] = useState({
     title: '',
     author: '',
     image_url: 'https://reactnative.dev/img/tiny_logo.png'
-  };
-  const [imageUrl, setImageUrl] = React.useState("https://reactnative.dev/img/tiny_logo.png");
+  });
+  const [imageUrl, setImageUrl] = useState('https://reactnative.dev/img/tiny_logo.png');
+  const [bookInit, setBookInit] = useState(false);
 
-  useEffect(()=>{
-    setImageUrl(bookData['image_url']);
-  },[bookInit]);
+  useEffect(() => {
+    if (bookInit) {
+      setImageUrl(bookData.image_url);
+    }
+  }, [bookInit, bookData]);
 
   const handleBookFetch = () => {
     getBookDataAsync(isbnSearch)
       .then((rawData) => {
         if (rawData !== null) {
-          bookData = {
-            title: rawData['details']['title'],
-            author: rawData['details']['authors'][0]['name'],
-            image_url: rawData["thumbnail_url"]
-          };
-          console.log(bookData);
-          console.log(bookData['image_url']);
+          setBookData({
+            title: rawData.details.title,
+            author: rawData.details.authors[0].name,
+            image_url: rawData.thumbnail_url,
+          });
         } else {
-          console.log("error occurred");
+          console.log('error occurred');
         }
       })
       .finally((rawData) => {
-        if(rawData !== null) {
-          setBookInit(true);
-        } else {
-          setBookInit(false);
-        }
-        
+        setBookInit(rawData !== null);
       });
   };
 
@@ -117,17 +111,20 @@ function AboutScreen({ navigation }) {
       />
       <Button
         onPress={() => navigation.navigate('BarcodeScannerScreen', { setIsbnSearch })}
-        title="scan barcode"
+        title="Scan Barcode"
       />
       <Button
         onPress={handleBookFetch}
-        title="fetch book"
+        title="Fetch Book"
       />
-      {bookInit && <Image 
-      style={{ width:200, height:320 }}
-        source={{
-          uri: "https://covers.openlibrary.org/b/id/12358359.jpg"
-        }}/>}
+      {bookInit && (
+        <Image
+          style={{ width: 200, height: 320 }}
+          source={{
+            uri: imageUrl
+          }}
+        />
+      )}
     </View>
   );
 }

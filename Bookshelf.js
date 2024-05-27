@@ -6,46 +6,28 @@ const Bookshelf = ({ navigation }) => {
   const [books, setBooks] = useState(
 [
     {
-        "id": 1,
-        "title": "Book 1",
-        "author": "Author 1",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
+      "id": 1,
+      "title": "Yeraltından Notlar",
+      "author": "F.M. Dostoyevski",
+      "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
     },
     {
-        "id": 2,
-        "title": "Book 2",
-        "author": "Author 2",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
+      "id": 2,
+      "title": "Fahrenheit 451",
+      "author": "Ray Bradbury",
+      "coverImageUrl": "https://covers.openlibrary.org/b/id/8751572.jpg"
     },
     {
-        "id": 3,
-        "title": "Book 3",
-        "author": "Author 3",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
+      "id": 3,
+      "title": "Türkiyede Geri Kalmışlığın Tarihi",
+      "author": "İsmail Cem",
+      "coverImageUrl": "https://covers.openlibrary.org/b/id/12358278.jpg"
     },
     {
-        "id": 4,
-        "title": "Book 4",
-        "author": "Author 4",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
-    },
-    {
-        "id": 5,
-        "title": "Book 5",
-        "author": "Author 5",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
-    },
-    {
-        "id": 6,
-        "title": "Book 6",
-        "author": "Author 6",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
-    },
-    {
-        "id": 7,
-        "title": "Book 7",
-        "author": "Author 7",
-        "coverImageUrl": "https://covers.openlibrary.org/b/id/12358359.jpg"
+      "id": 4,
+      "title": "Suç ve Ceza",
+      "author": "F.M. Dostoyevski",
+      "coverImageUrl": "https://covers.openlibrary.org/b/id/10736127.jpg"
     }
 ]);
 
